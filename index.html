@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>paneljayasamudra</title>
+  <style>
+    body {
+      background: url('dark-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .login-container {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+      position: relative;
+    }
+    .jumpscare-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #ghost {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      width: 300px;
+    }
+    @keyframes moveGhost {
+      0% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.2) translateY(-20px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+    .glitch {
+      animation: glitchEffect 0.1s infinite;
+    }
+    @keyframes glitchEffect {
+      0% { opacity: 0.8; transform: translate(2px, -2px); }
+      100% { opacity: 1; transform: translate(-2px, 2px); }
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+    }
+    button {
+      background: blue;
+      color: white;
+      cursor: pointer;
+    }
+    .logo {
+      width: 200px;
+      margin-bottom: 20px;
+     }
+     .footer {
+       color: red;
+       text-align: center;
+       padding: 10px 0;
+    }
+  </style>
+<link rel="me" href="https://www.blogger.com/profile/17124816616158171421" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+</head>
+<body>
+  <div class="login-container" id="loginContainer">
+    <img src="https://files.catbox.moe/o2x74k.png" alt="Pterodactyl.svg" class="logo">
+    <h1>Login to Continue</h1>
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button id="loginButton">Login</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+  <div class="jumpscare-container" id="jumpscareContainer">
+    <img id="ghost" src="https://files.catbox.moe/7fn5g1.jpg" alt="Hantu" style="top:40%;" />
+    <audio id="horrorAudio" src="https://files.catbox.moe/i62oz3.mp3"></audio>
+    <audio id="whisperAudio" src="https://files.catbox.moe/5lrm38.mp3"></audio>
+  </div>
+  <script>
+    const loginButton = document.getElementById('loginButton');
+    const loginContainer = document.getElementById('loginContainer');
+    const jumpscareContainer = document.getElementById('jumpscareContainer');
+    const ghost = document.getElementById('ghost');
+    const horrorAudio = document.getElementById('horrorAudio');
+    const whisperAudio = document.getElementById('whisperAudio');
+    
+    const adminUsername = "nujaya";
+    const adminPassword = "free001";
+    
+    loginButton.addEventListener('click', function () {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      if (username === adminUsername && password === adminPassword) {
+        loginContainer.classList.add('glitch');
+        whisperAudio.play();
+        setTimeout(() => {
+          loginContainer.style.display = 'none';
+          jumpscareContainer.style.display = 'flex';
+          horrorAudio.play();
+          ghost.style.opacity = '1';
+          ghost.style.animation = 'moveGhost 2s infinite';
+        }, 2000);
+      } else {
+        document.getElementById('errorMsg').textContent = 'Username atau Password salah!';
+      }
+    });
+  </script>
+</body>
+<div class="footer">
+        <p>&copy; 2015 - 2025 Pterodactyl Software</p>
+
+</html>
